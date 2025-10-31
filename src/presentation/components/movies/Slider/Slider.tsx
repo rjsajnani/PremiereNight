@@ -1,5 +1,11 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { SliderProps } from './Slider.types';
 import MovieCard from '../MovieCard/MovieCard';
 
@@ -7,16 +13,20 @@ const Slider = ({ title, movies, isHorizontal = true }: SliderProps) => {
   return (
     <View>
       {!!title && <Text style={styles.sliderText}>{title}</Text>}
-      <FlatList
-        horizontal={isHorizontal}
-        data={movies}
-        showsHorizontalScrollIndicator={false}
-        numColumns={isHorizontal ? undefined : 2}
-        key={isHorizontal ? 'horizontal' : 'grid'}
-        renderItem={({ item }) => (
-          <MovieCard isHorizontal={isHorizontal} movie={item} />
-        )}
-      />
+      {movies.length > 0 ? (
+        <FlatList
+          horizontal={isHorizontal}
+          data={movies}
+          showsHorizontalScrollIndicator={false}
+          numColumns={isHorizontal ? undefined : 2}
+          key={isHorizontal ? 'horizontal' : 'grid'}
+          renderItem={({ item }) => (
+            <MovieCard isHorizontal={isHorizontal} movie={item} />
+          )}
+        />
+      ) : (
+        <ActivityIndicator size={'large'} />
+      )}
     </View>
   );
 };

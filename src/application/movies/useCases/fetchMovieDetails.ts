@@ -3,7 +3,9 @@ import { MovieDetails } from '@domain/model';
 
 export async function fetchMovieDetails(movieId: number) {
   try {
-    const movieDetailsRes = await movieClient.get<MovieDetails>(`/${movieId}`);
+    const movieDetailsRes = await movieClient.get<MovieDetails>(
+      `/movie/${movieId}`,
+    );
 
     return {
       results: movieDetailsRes.data,

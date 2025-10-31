@@ -13,9 +13,10 @@ const MovieDetails = (movieDetails: MovieDetailsType) => {
           <Text style={styles.voteAverage}>{movieDetails.vote_average}</Text>
         </View>
         <View>
-          <Text style={styles.genresText}>
+          <Text style={styles.smallText}>
             {movieDetails.genres.map(genre => genre.name).join('     ')}
           </Text>
+          <Text style={styles.smallText}>{movieDetails.release_date}</Text>
         </View>
       </View>
 
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 14,
   },
-  genresText: {
+  smallText: {
     marginLeft: 15,
     color: 'white',
     fontSize: 16,
