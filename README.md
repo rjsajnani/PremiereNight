@@ -4,6 +4,17 @@ A modern React Native movie discovery application built with Clean Architecture 
 
 ### Note: Inital load of the app on iOS 18.0 or higher can return Axios error (404 mainly). This is due to some issue in iOS side. But incase it doesn't work you can reload the app again
 
+## App Demo
+
+<details>
+  <summary>📱 App Screenshots (Click to expand)</summary>
+
+  | Home Screen | Movie Details | Wishlist |
+  |--------------|----------------|-----------|
+  | ![Home Screen](./screenshots/home.png) | ![Movie Details](./screenshots/details.png) | ![Wishlist](./screenshots/wishlist.png) |
+
+</details>
+
 ## 📋 Table of Contents
 
 - [Features](#features)
@@ -317,6 +328,7 @@ npm start -- --reset-cache
 - Ensure `ANDROID_HOME` environment variable is set
 - Check that Android SDK Platform 33 is installed
 - Verify USB debugging is enabled on device
+- remember to add local.properties 
 
 **iOS:**
 - Ensure Xcode Command Line Tools are installed: `xcode-select --install`
