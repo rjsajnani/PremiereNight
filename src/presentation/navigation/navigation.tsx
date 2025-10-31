@@ -18,6 +18,35 @@ const HomeStack = createNativeStackNavigator({
     Modal: {
       screenOptions: {
         headerShown: true,
+        headerTransparent: true,
+        headerTitle: '',
+        headerBackVisible: false,
+        presentation: 'modal',
+      },
+      screens: {
+        Details: DetailsScreen,
+      },
+    },
+  },
+});
+const WishlistStack = createNativeStackNavigator({
+  groups: {
+    Wishlist: {
+      screens: {
+        App: {
+          screen: WishListScreen,
+          options: {
+            headerShown: false,
+          },
+        },
+      },
+    },
+    Modal: {
+      screenOptions: {
+        headerShown: true,
+        headerTransparent: true,
+        headerTitle: '',
+        headerBackVisible: false,
         presentation: 'modal',
       },
       screens: {
@@ -58,7 +87,12 @@ const RootTabs = createBottomTabNavigator({
         headerShown: false,
       },
     },
-    WishList: WishListScreen,
+    WishList: {
+      screen: WishlistStack,
+      opacity: {
+        headerShown: false,
+      },
+    },
   },
 });
 

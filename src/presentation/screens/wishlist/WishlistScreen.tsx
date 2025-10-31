@@ -1,14 +1,31 @@
+import { Slider } from '@components/movies';
+import { selectWishlistItems } from '@state/slice';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 
 export function WishListScreen() {
+  const wishlistItems = useSelector(selectWishlistItems);
+
   return (
     <View style={styles.container}>
-      <Text>WishList</Text>
+      {wishlistItems.length > 0 ? (
+        <Slider movies={wishlistItems} isHorizontal={false} />
+      ) : (
+        <Text style={styles.text}> No movies added to wishlist </Text>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 10,
+  },
+  text: {
+    fontSize: 18,
+  },
 });
