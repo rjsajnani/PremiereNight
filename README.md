@@ -1,97 +1,325 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# PremiereNight 🎬
 
-# Getting Started
+A modern React Native movie discovery application built with Clean Architecture principles, featuring movie browsing, detailed information, and wishlist management powered by The Movie Database (TMDB) API.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+### Note: Inital load of the app on iOS 18.0 or higher can return Axios error (404 mainly). This is due to some issue in iOS side. But incase it doesn't work you can reload the app again
 
-## Step 1: Start Metro
+## 📋 Table of Contents
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Running the App](#running-the-app)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
+- [Troubleshooting](#troubleshooting)
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## ✨ Features
 
-```sh
-# Using npm
-npm start
+- 🎥 Browse now playing,to-rated,popular, movies
+- ❤️ Wishlist functionality with local persistence
+- 📊 Redux state management
+- 🎨 Bottom tab navigation
+- 🔍 Movie details view
 
-# OR using Yarn
+## 🛠 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+### Required
+
+- **Node.js**: v16.x or higher ([Download](https://nodejs.org/))
+- **npm** or **Yarn**: Package manager
+- **React Native CLI**: Latest version
+- **Watchman** (macOS): For file watching ([Download](https://facebook.github.io/watchman/))
+
+### For Android Development
+
+- **Java Development Kit (JDK)**: v17 or higher
+- **Android Studio**: Latest version with Android SDK
+- **Android SDK Platform 33** (Android 13)
+- **Android Emulator** or physical device with USB debugging enabled
+
+### For iOS Development (macOS only)
+
+- **Xcode**: v14.0 or higher
+- **CocoaPods**: v1.11.0 or higher (`sudo gem install cocoapods`)
+- **iOS Simulator** or physical device
+
+### Verify Installation
+```bash
+# Check Node version
+node --version  # Should be v16+
+
+# Check npm version
+npm --version
+
+# Check React Native CLI
+npx react-native --version
+
+# Check Java version (for Android)
+java -version  # Should be 17+
+
+# Check CocoaPods (for iOS)
+pod --version
+```
+
+## 📦 Installation
+
+### Step 1: Clone the Repository
+```bash
+git clone git@github.com:rjsajnani/PremiereNight.git
+cd PremiereNight
+```
+
+### Step 2: Install Dependencies
+```bash
+yarn install
+```
+
+### Step 3: Install iOS Dependencies (macOS only)
+```bash
+npx pod install
+```
+
+### Step 4: Set Up Environment Variables
+
+Create a `.env` file in the root directory:
+```bash
+cp .env.example .env
+```
+
+Add your TMDB API credentials:
+```env
+TMDB_API_KEY=your_api_key_here
+API_URL=https://api.themoviedb.org/3/movie
+```
+
+> **Note**: Get your API key from [The Movie Database (TMDB)](https://www.themoviedb.org/settings/api)
+
+## 🚀 Running the App
+
+### Start Metro Bundler
+
+First, start the Metro JavaScript bundler:
+```bash
 yarn start
 ```
 
-## Step 2: Build and run your app
+Keep this terminal window open.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Run on Android
 
-### Android
+Open a new terminal window and run:
+```bash
+npx react-native run-android
+```
 
-```sh
-# Using npm
+**Prerequisites for Android:**
+- Start Android Emulator from Android Studio, OR
+- Connect a physical device with USB debugging enabled
+
+### Run on iOS (macOS only)
+
+Open a new terminal window and run:
+```bash
+npx react-native run-ios
+```
+
+
+## 🏗 Architecture
+
+### Clean Architecture Implementation
+
+This project follows **Clean Architecture** principles with clear separation of concerns:
+```
+src/
+├── domain/              # Business entities and rules (Framework-independent)
+│   ├── models/         # Business entities (Movies, User, etc.)
+├── application/         # Business logic and use cases
+│   ├── movies/         
+│   │   ├── useCases/   # Business operations
+│
+├── infrastructure/      # External concerns and implementations
+│   ├── api/            # HTTP clients and repositories
+│
+└── presentation/        # UI and state management
+    ├── screens/        # Screen components
+    ├── components/     # Reusable UI components
+    ├── navigation/     # Navigation configuration
+    ├── state/          # Redux slices and store
+    ├── hooks/          # Custom React hooks
+```
+
+### Key Architectural Decisions
+
+#### 1. **Clean Architecture (Layered Approach)**
+
+**Decision**: Implement Clean Architecture with four distinct layers.
+
+**Rationale**:
+- **Testability**: Each layer can be tested independently
+- **Maintainability**: Clear separation makes code easier to understand and modify
+- **Scalability**: Easy to add new features without affecting existing code
+- **Framework Independence**: Business logic doesn't depend on React Native or Redux
+
+**Trade-offs**:
+- ✅ More boilerplate code initially
+- ✅ Steeper learning curve for new developers
+- ✅ Better long-term maintainability
+- ❌ More files and folders to navigate
+
+#### 2. **Redux Toolkit for State Management**
+
+**Decision**: Use Redux Toolkit with Redux Persist for global state.
+
+**Rationale**:
+- Centralized state management for movies and wishlist
+- Predictable state updates with actions/reducers
+- Time-travel debugging with Redux DevTools
+- Built-in immutability with Immer
+- Persistent wishlist across app sessions
+
+
+**Trade-offs**:
+- ✅ Excellent developer experience
+- ✅ Great debugging tools
+- ✅ Large ecosystem
+- ❌ Slightly more boilerplate than alternatives
+
+#### 3. **React Navigation (Bottom Tabs + Stack)**
+
+**Decision**: Use React Navigation 7 with bottom tabs and nested stacks.
+
+**Rationale**:
+- Industry standard for React Native navigation
+- Type-safe navigation with TypeScript
+- Native feel with platform-specific transitions
+
+#### 4. **TypeScript Throughout**
+
+**Decision**: Use strict TypeScript configuration.
+
+**Rationale**:
+- Catch errors at compile time
+- Better IDE autocomplete and IntelliSense
+- Self-documenting code
+- Easier refactoring
+
+#### 5. **Path Aliases for Imports**
+
+**Decision**: Use `@` aliases for cleaner imports.
+```typescript
+// Instead of:
+import { Movie } from '../../../domain/models/Movies';
+
+// Use:
+import { Movie } from '@domain/models';
+```
+
+**Rationale**:
+- Cleaner, more readable imports
+- Easier to move files around
+- Less error-prone
+
+### Key Assumptions
+
+1. **API Assumptions**:
+   - TMDB API is available and reliable
+   - API response structure remains consistent
+   - Images are hosted on TMDB CDN
+
+2. **User Behavior**:
+   - Users have internet connection for initial data fetch
+   - Wishlist is personal
+   - Users understand standard mobile UI patterns
+
+3. **Data Management**:
+   - Wishlist stored locally (no backend)
+   - No user authentication required
+   - Movie data refreshes on app launch
+
+
+## 📁 Project Structure
+```
+PremiereNight/
+├── src/
+│   ├── domain/              # Business logic layer
+│   ├── application/         # Use cases and services
+│   ├── infrastructure/      # External integrations
+│   └── presentation/        # UI components and state
+│       ├── screens/
+│       ├── components/
+│       ├── navigation/
+│       ├── state/
+│       └── hooks/
+├── android/                 # Android native code
+├── ios/                     # iOS native code
+├── .env                    # Environment variables
+├── babel.config.js         # Babel configuration
+├── tsconfig.json           # TypeScript configuration
+└── package.json            # Dependencies
+```
+
+## 🌍 Environment Variables
+
+Required environment variables:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `TMDB_API_KEY` | TMDB API Key | `abc123def456...` |
+| `API_URL` | TMDB API Base URL | `https://api.themoviedb.org/3/movie` |
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Metro Bundler Issues:**
+```bash
+# Clear Metro cache
+npm start -- --reset-cache
+```
+
+**Android Build Failures:**
+```bash
+cd android
+./gradlew clean
+cd ..
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+**iOS Build Failures:**
+```bash
+cd ios
+pod deintegrate
+pod install
+cd ..
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+**Module Not Found Errors:**
+```bash
+# Clear watchman
+watchman watch-del-all
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+# Delete node_modules
+rm -rf node_modules
+npm install
 
-## Step 3: Modify your app
+# Clear Metro cache
+npm start -- --reset-cache
+```
 
-Now that you have successfully run the app, let's make changes!
+### Platform-Specific Issues
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+**Android:**
+- Ensure `ANDROID_HOME` environment variable is set
+- Check that Android SDK Platform 33 is installed
+- Verify USB debugging is enabled on device
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+**iOS:**
+- Ensure Xcode Command Line Tools are installed: `xcode-select --install`
+- Check that you're opening `.xcworkspace` not `.xcodeproj`
+- Reset iOS Simulator: Device → Erase All Content and Settings
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
