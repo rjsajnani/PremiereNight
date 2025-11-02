@@ -9,7 +9,11 @@ export const WishlistButton = ({
   isWishlist: boolean;
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
+    <TouchableOpacity
+      testID="wishlist-button"
+      onPress={onPress}
+      style={styles.button}
+    >
       <Ionicons
         name={isWishlist ? 'heart' : 'heart-outline'}
         size={24}

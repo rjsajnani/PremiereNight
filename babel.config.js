@@ -17,6 +17,7 @@ module.exports = {
           '@domain': './src/domain/',
           '@application': './src/application',
           '@constants': './src/shared',
+          '@mocks': './src/__mocks__',
         },
       },
     ],

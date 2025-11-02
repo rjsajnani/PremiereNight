@@ -8,7 +8,11 @@ const MovieCategories = ({
   onViewMore,
 }: MovieCategoriesProps) => {
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView
+      testID="movie-categories-scroll"
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
       <Suspense fallback={<ActivityIndicator size={'large'} />}>
         {movieCategories.map((category, index) => (
           <Slider

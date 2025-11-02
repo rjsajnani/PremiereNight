@@ -21,6 +21,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
       activeOpacity={0.5}
       onPress={() => navigation.navigate('Details', movie)}
       style={styles.container}
+      testID="movie-card"
     >
       <View style={styles.imageContainer}>
         <Image source={{ uri }} style={styles.image} />

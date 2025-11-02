@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieCategories Snapshot Tests should match snapshot when empty 1`] = `
+<RCTScrollView
+  showsVerticalScrollIndicator={false}
+  style={
+    {
+      "flex": 1,
+    }
+  }
+  testID="movie-categories-scroll"
+>
+  <View />
+</RCTScrollView>
+`;

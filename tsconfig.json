@@ -2,7 +2,7 @@
   "extends": "@react-native/typescript-config",
   "include": [
     "**/*.ts",
-    "**/*.tsx",
+    "**/*.tsx", 
   ],
   "exclude": [
     "**/node_modules",
@@ -38,7 +38,11 @@
       "@constants/*": [
         "./src/shared/*"
       ],
+      "@mocks/*": [
+        "./src/__mocks__/*"
+      ],
     },
+    "types": ["jest", "@types/jest"], 
     "typeRoots": [
       "./types",
       "./node_modules/@types"

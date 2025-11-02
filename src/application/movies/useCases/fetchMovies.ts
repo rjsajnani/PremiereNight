@@ -1,26 +1,14 @@
 import movieClient from '@api/client/movieClient';
+import { MOVIE_CATEGORY_CONFIG } from '@constants/constants';
 import { MoviesList } from '@domain/index';
 
 export async function fetchMovies() {
   try {
-    const nowPlayingPromise = await movieClient.get<MoviesList>(
-      '/movie/now_playing',
+    const moviePromises = Object.values(MOVIE_CATEGORY_CONFIG).map(category =>
+      movieClient.get<MoviesList>(category.endpoint),
     );
-    const popularPromise = await movieClient.get<MoviesList>('/movie/popular');
-    const topRatedPromise = await movieClient.get<MoviesList>(
-      '/movie/top_rated',
-    );
-    const upcomingPromise = await movieClient.get<MoviesList>(
-      '/movie/upcoming',
-    );
-
     const [nowPlayingRes, popularRes, topRatedRes, upcomingRes] =
-      await Promise.all([
-        nowPlayingPromise,
-        popularPromise,
-        topRatedPromise,
-        upcomingPromise,
-      ]);
+      await Promise.all(moviePromises);
 
     return {
       nowPlaying: {

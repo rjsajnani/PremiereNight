@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieDetails Snapshot Tests should match snapshot with full data 1`] = `
+[
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#7A93AC",
+          "borderRadius": 10,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "padding": 7.5,
+        }
+      }
+    >
+      <Text
+        testID="icon"
+      >
+        star
+      </Text>
+      <Text
+        style={
+          {
+            "color": "black",
+            "fontSize": 14,
+          }
+        }
+      >
+        8.5
+      </Text>
+    </View>
+    <View>
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontSize": 16,
+            "marginLeft": 15,
+          }
+        }
+      >
+        Action     Adventure     Science Fiction
+      </Text>
+      <Text
+        style={
+          {
+            "color": "white",
+            "fontSize": 16,
+            "marginLeft": 15,
+          }
+        }
+      >
+        2024-01-15
+      </Text>
+    </View>
+  </View>,
+  <Text
+    style={
+      {
+        "color": "white",
+        "fontSize": 25,
+        "fontWeight": "bold",
+        "marginTop": 20,
+      }
+    }
+  >
+    Synopsis
+  </Text>,
+  <Text
+    style={
+      {
+        "color": "white",
+        "fontSize": 16,
+        "lineHeight": 24,
+      }
+    }
+  >
+    This is a test movie overview with detailed description.
+  </Text>,
+  <Text
+    style={
+      {
+        "color": "white",
+        "fontSize": 25,
+        "fontWeight": "bold",
+        "marginTop": 20,
+      }
+    }
+  >
+    Budget
+  </Text>,
+  <Text
+    style={
+      {
+        "color": "white",
+        "fontSize": 16,
+      }
+    }
+  >
+    $150,000,000
+     USD
+  </Text>,
+]
+`;
