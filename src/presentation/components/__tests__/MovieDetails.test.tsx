@@ -5,9 +5,8 @@ import { MovieDetails } from '@components/movies';
 import { mockMovieDetails } from '@mocks/movie';
 
 jest.mock('@react-native-vector-icons/ionicons', () => {
-  const React = require('react');
   const { Text } = require('react-native');
-  return function Ionicons({ name, testID, ...props }: any) {
+  return function Ionicons({ name, testID }: any) {
     return <Text testID={testID || 'icon'}>{name}</Text>;
   };
 });

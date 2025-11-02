@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text } from 'react-native';
+import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import Slider from '../Slider/Slider';
 import { MovieCategoriesProps } from './MovieCategories.types';
 

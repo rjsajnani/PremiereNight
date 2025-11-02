@@ -8,6 +8,7 @@
 import {
   ActivityIndicator,
   StatusBar,
+  StyleSheet,
   useColorScheme,
   View,
 } from 'react-native';
@@ -25,13 +26,7 @@ function App() {
       <Provider store={store}>
         <PersistGate
           loading={
-            <View
-              style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+            <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" />
             </View>
           }
@@ -46,3 +41,11 @@ function App() {
 }
 
 export default App;
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
