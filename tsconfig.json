@@ -35,6 +35,9 @@
       "@application/*": [
         "./src/application/*"
       ],
+      "@constants/*": [
+        "./src/shared/*"
+      ],
     },
     "typeRoots": [
       "./types",

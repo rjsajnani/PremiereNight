@@ -10,7 +10,7 @@ export function WishListScreen() {
   return (
     <View style={styles.container}>
       {wishlistItems.length > 0 ? (
-        <Slider movies={wishlistItems} isHorizontal={false} />
+        <Slider movies={wishlistItems} isHorizontal={false} showAll />
       ) : (
         <Text style={styles.text}> No movies added to wishlist </Text>
       )}

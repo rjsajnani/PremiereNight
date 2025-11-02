@@ -3,7 +3,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import { DetailsScreen, HomeScreen, WishListScreen } from '@screen/index';
+import {
+  DetailsScreen,
+  HomeScreen,
+  WishListScreen,
+  MovieCategoryScreen,
+} from '@screen/index';
 
 const HomeStack = createNativeStackNavigator({
   groups: {
@@ -12,6 +17,16 @@ const HomeStack = createNativeStackNavigator({
         App: {
           screen: HomeScreen,
           options: { title: 'Premier Night' },
+        },
+      },
+    },
+    MovieCategories: {
+      screens: {
+        MovieCategories: {
+          screen: MovieCategoryScreen,
+          options: ({ route }) => ({
+            title: route.params?.title,
+          }),
         },
       },
     },

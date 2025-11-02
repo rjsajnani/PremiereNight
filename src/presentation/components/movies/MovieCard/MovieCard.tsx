@@ -1,9 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { MovieCardProps } from './MovieCard.types';
 
-const MovieCard = ({ movie, isHorizontal }: MovieCardProps) => {
+const screenWidth = Dimensions.get('screen').width;
+
+const MovieCard = ({ movie }: MovieCardProps) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const navigation = useNavigation();
 
@@ -11,7 +20,7 @@ const MovieCard = ({ movie, isHorizontal }: MovieCardProps) => {
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={() => navigation.navigate('Details', movie)}
-      style={{ ...styles.container, width: isHorizontal ? 300 : 200 }}
+      style={styles.container}
     >
       <View style={styles.imageContainer}>
         <Image source={{ uri }} style={styles.image} />
@@ -30,7 +39,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 2,
     paddingBottom: 20,
     paddingHorizontal: 7,
-    height: 420,
+    height: 280,
+    width: screenWidth / 2,
   },
   imageContainer: {
     flex: 1,

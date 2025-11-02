@@ -1,4 +1,5 @@
-import { fetchMovies } from '@application/movies';
+import { fetchMovieByCategory, fetchMovies } from '@application/movies';
+import { MOVIE_CATEGORY_CONFIG, MovieCategory } from '@constants/constants';
 import { MoviesList } from '@domain/index';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
@@ -6,6 +7,32 @@ export const loadHomeDashboard = createAsyncThunk(
   'movies/loadHomeDashboard',
   async () => {
     return await fetchMovies();
+  },
+);
+
+export const loadMoreMovies = createAsyncThunk(
+  'movies/loadMoreMovies',
+  async (
+    {
+      categoryKey,
+      page,
+    }: {
+      categoryKey: MovieCategory['key'];
+      page: number;
+    },
+    { rejectWithValue },
+  ) => {
+    try {
+      const endpoint = MOVIE_CATEGORY_CONFIG[categoryKey].endpoint;
+      const response = await fetchMovieByCategory(endpoint, page);
+
+      return {
+        categoryKey,
+        data: response as MoviesList,
+      };
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   },
 );
 
@@ -46,6 +73,23 @@ const moviesSlice = createSlice({
     });
     builder.addCase(loadHomeDashboard.rejected, (state, action) => {
       state.status = 'failed';
+      state.error = action.error.message;
+    });
+    builder.addCase(loadMoreMovies.pending, state => {
+      state.paginationStatus = 'loading';
+    });
+    builder.addCase(loadMoreMovies.fulfilled, (state, action) => {
+      state.paginationStatus = 'succeeded';
+      const { categoryKey, data } = action.payload;
+      state[categoryKey] = {
+        results: [...state[categoryKey].results, ...data.results],
+        page: data.page,
+        total_pages: data.total_pages,
+        total_results: data.total_results,
+      };
+    });
+    builder.addCase(loadMoreMovies.rejected, (state, action) => {
+      state.paginationStatus = 'failed';
       state.error = action.error.message;
     });
   },

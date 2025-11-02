@@ -16,6 +16,7 @@ module.exports = {
           '@api': './src/infrastructure/api',
           '@domain': './src/domain/',
           '@application': './src/application',
+          '@constants': './src/shared',
         },
       },
     ],
