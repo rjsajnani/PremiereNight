@@ -29,9 +29,13 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionRequiresForwardSecrecy</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
+		<key>NSExceptionAllowsInsecureHTTPLoads</key>
+    <true />
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
