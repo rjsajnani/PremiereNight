@@ -2,16 +2,16 @@
 
 A modern React Native movie discovery application built with Clean Architecture principles, featuring movie browsing, detailed information, and wishlist management powered by The Movie Database (TMDB) API.
 
-### Note: Inital load of the app on iOS 18.0 or higher can return Axios error (404 mainly). This is due to some issue in iOS side. But incase it doesn't work you can reload the app again
+### Note: Initial load of the app on iOS 18.0 or higher can return Axios error (404 mainly). This is due to some issue in iOS side. But incase it doesn't work you can reload the app again.I have updated Info.plist to fix the issue 
 
 ## App Demo
 
 <details>
   <summary>📱 App Screenshots (Click to expand)</summary>
 
-  | Home Screen | Movie Details | Wishlist |
-  |--------------|----------------|-----------|
-  | ![Home Screen](./screenshots/home.png) | ![Movie Details](./screenshots/details.png) | ![Wishlist](./screenshots/wishlist.png) |
+  | Home Screen | Movie Details | View More | Wishlist |
+  |--------------|----------------|-----------|-----------|
+  | ![Home Screen](./screenshots/home.png)  | ![Movie Details](./screenshots/details.png) |  ![View More](./screenshots/movie-category.png) | ![Wishlist](./screenshots/wishlist.png) |
 
 </details>
 
@@ -24,6 +24,7 @@ A modern React Native movie discovery application built with Clean Architecture 
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
 - [Environment Variables](#environment-variables)
+- [Testing](#testing)
 - [Troubleshooting](#troubleshooting)
 
 ## ✨ Features
@@ -33,6 +34,8 @@ A modern React Native movie discovery application built with Clean Architecture 
 - 📊 Redux state management
 - 🎨 Bottom tab navigation
 - 🔍 Movie details view
+- 🔍 Search movies
+- 🎥 Top 5 Now Playing highlighted
 
 ## 🛠 Prerequisites
 
@@ -281,6 +284,13 @@ Required environment variables:
 |----------|-------------|---------|
 | `TMDB_API_KEY` | TMDB API Key | `abc123def456...` |
 | `API_URL` | TMDB API Base URL | `https://api.themoviedb.org/3/movie` |
+
+##  Test Coverage
+
+First, start the Metro JavaScript bundler:
+```bash
+npx jest test --coverage
+```
 
 ## 🐛 Troubleshooting
 

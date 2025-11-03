@@ -19,11 +19,12 @@ module.exports = {
       '@react-native|' +
       'react-native|' +
       '@react-navigation|' +
-      'react-native-vector-icons|' +
+      '@react-native-vector-icons|' +
       '@reduxjs/toolkit|' +
       'immer|' +
       'react-redux|' +
-      'redux' +
+      'redux|' +
+      '@react-native-async-storage' +
       ')/)',
   ],
   testPathIgnorePatterns: [
