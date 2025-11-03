@@ -7,6 +7,7 @@ export const SearchBar = ({
   searchQuery,
   onChangeSearchQuery,
   onSearch,
+  onClear,
 }: SearchBarProps) => {
   const handleSearch = () => {
     onSearch(searchQuery);
@@ -21,8 +22,16 @@ export const SearchBar = ({
         onChangeText={onChangeSearchQuery}
         value={searchQuery}
       />
-      <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-        <Ionicons name="search" size={28} color={'black'} />
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onClear ? onClear : handleSearch}
+      >
+        <Ionicons
+          name={onClear ? 'close' : 'search'}
+          size={28}
+          color={'black'}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
     width: '85%',
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
-  searchButton: {
+  button: {
     padding: 10,
     height: '100%',
     alignItems: 'center',

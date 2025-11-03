@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
 import Slider from '../Slider/Slider';
 import { MovieCategoriesProps } from './MovieCategories.types';
+import MovieCarousel from '../MovieCarousel/MovieCarousel';
 
 const MovieCategories = ({
   movieCategories,
@@ -14,11 +15,18 @@ const MovieCategories = ({
       showsVerticalScrollIndicator={false}
     >
       <Suspense fallback={<ActivityIndicator size={'large'} />}>
+        {movieCategories[0] && (
+          <MovieCarousel data={movieCategories[0].results} />
+        )}
         {movieCategories.map((category, index) => (
           <Slider
             key={`${category.key}-${index}`}
             title={category.title}
-            movies={category.results}
+            movies={
+              index === 0
+                ? category.results.slice(5, category.results.length)
+                : category.results
+            }
             onViewMore={
               onViewMore
                 ? () => onViewMore(category.key, category.title)

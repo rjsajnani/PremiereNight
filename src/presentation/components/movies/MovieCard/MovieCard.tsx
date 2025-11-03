@@ -12,7 +12,7 @@ import { MovieCardProps } from './MovieCard.types';
 
 const screenWidth = Dimensions.get('screen').width;
 
-const MovieCard = ({ movie }: MovieCardProps) => {
+const MovieCard = ({ movie, isCarousel }: MovieCardProps) => {
   const uri = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const navigation = useNavigation();
 
@@ -20,7 +20,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
     <TouchableOpacity
       activeOpacity={0.5}
       onPress={() => navigation.navigate('Details', movie)}
-      style={styles.container}
+      style={isCarousel ? styles.carouselContainer : styles.container}
       testID="movie-card"
     >
       <View style={styles.imageContainer}>
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     height: 280,
     width: screenWidth / 2,
   },
+  carouselContainer: { height: 500 },
   imageContainer: {
     flex: 1,
     borderRadius: 10,
